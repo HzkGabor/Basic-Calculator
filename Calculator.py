@@ -5,6 +5,7 @@ window.title('Calculator')
 window.geometry('505x630')
 window.resizable(False, False)
 window.config(bg='#0f0f0f')
+window.config(fg='white')
 
 display = tk.Entry(
     window,
@@ -23,7 +24,29 @@ display.grid(
 )
 
 def button_clicks(value):
-    print(value) 
+    if value == "del":
+        display.delete(len(display.get()) - 1, tk.END)
+
+    elif value == "C":
+        display.delete(0, tk.END)
+
+    elif value == "×":
+        display.insert(tk.END, "*")
+
+    elif value == "=":
+        expression = display.get()
+
+        try:
+            result = eval(expression)
+            display.delete(0, tk.END)
+            display.insert(tk.END, result)
+
+        except:
+            display.delete(0, tk.END)
+            display.insert(tk.END, "Error")
+
+    else:
+        display.insert(tk.END, value)
 
 buttons = [
     ("C", 1, 0),
@@ -66,7 +89,7 @@ for text, row, column in buttons:
         activebackground="#555555",
         activeforeground="white",
 
-        command=lambda value=text: button_click(value)
+        command=lambda value=text: button_clicks(value)
     )
 
     button.grid(
