@@ -10,7 +10,7 @@ display = tk.Entry(
     window,
     font=('Arial', 32, 'bold'),
     justify='right',
-    bg="#2B2B2B",
+    bg="#1F1F1F",
     fg='white',
     bd=0
 )
@@ -94,10 +94,10 @@ for text, row, column in buttons:
         width=5,
         height=1,
 
-        bg="#2B2B2B",
+        bg="#3D3D3D",
         fg="white",
         bd=0,
-        activebackground="#0806A3",
+        activebackground="#060549",
         activeforeground="white",
 
         command=lambda value=text: button_clicks(value)
