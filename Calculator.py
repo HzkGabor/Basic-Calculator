@@ -2,24 +2,25 @@ import tkinter as tk
 
 window = tk.Tk()
 window.title('Calculator')
-window.geometry('505x620')
+window.geometry('480x370')
 window.resizable(False, False)
 window.config(bg='#0f0f0f')
 
 display = tk.Entry(
     window,
-    font=('Arial', 32),
+    font=('Arial', 32, 'bold'),
     justify='right',
-    bg="#222222",
-    fg='white'
+    bg="#2B2B2B",
+    fg='white',
+    bd=0
 )
 
 display.grid(
     row=0,
     column=0,
     columnspan=4,
-    padx=10,
-    pady=20,
+    padx=0,
+    pady=5,
     ipady=15
 )
 
@@ -30,7 +31,7 @@ def button_clicks(value):
     elif value == "C":
         display.delete(0, tk.END)
 
-    elif value == "x":
+    elif value == "X":
         display.insert(tk.END, "*")
 
     elif value == '-':
@@ -63,19 +64,19 @@ buttons = [
     ("%", 1, 2),
     ("/", 1, 3),
     
-    ("1", 2, 0),
-    ("2", 2, 1),
-    ("3", 2, 2),
-    ("x", 2, 3),
+    ("7", 2, 0),
+    ("8", 2, 1),
+    ("9", 2, 2),
+    ("X", 2, 3),
     
     ("4", 3, 0),
     ("5", 3, 1),
     ("6", 3, 2),
     ("-", 3, 3),
     
-    ("7", 4, 0),
-    ("8", 4, 1),
-    ("9", 4, 2),
+    ("1", 4, 0),
+    ("2", 4, 1),
+    ("3", 4, 2),
     ("+", 4, 3),
     
     ("()", 5, 0),
@@ -89,13 +90,14 @@ for text, row, column in buttons:
     button = tk.Button(
         window,
         text=text,
-        font=("Arial", 20),
-        width=6,
-        height=2,
+        font=("Arial", 20, 'bold'),
+        width=5,
+        height=1,
 
-        bg="#333333",
+        bg="#2B2B2B",
         fg="white",
-        activebackground="#555555",
+        bd=0,
+        activebackground="#0806A3",
         activeforeground="white",
 
         command=lambda value=text: button_clicks(value)
@@ -104,8 +106,9 @@ for text, row, column in buttons:
     button.grid(
         row=row,
         column=column,
-        padx=5,
-        pady=5
+        sticky='nsew',
+        padx=1,
+        pady=1
     )
 
 window.mainloop()
