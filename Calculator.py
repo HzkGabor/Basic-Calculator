@@ -5,13 +5,13 @@ window.title('Calculator')
 window.geometry('505x630')
 window.resizable(False, False)
 window.config(bg='#0f0f0f')
-window.config(fg='white')
 
 display = tk.Entry(
     window,
     font=('Arial', 32),
     justify='right',
-    bg="#222222"
+    bg="#222222",
+    fg='white'
 )
 
 display.grid(
