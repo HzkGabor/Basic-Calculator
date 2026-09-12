@@ -1,4 +1,17 @@
-# Basic Calculator
-Greetings my friends from World Wide!
-# I have made a very Basic Calculator in Python Terminal!
-**My goal** *is to make codes* for **Beginners**, and might teach something **New for them!**
+# Calculator➕
+A Calculator Project that can calculate everyday math operations!
+
+## 🔨Features:
+- Basic Operations 
+- % , and () operation!
+- Fast and low memory usage!
+
+## 👷What have I used?
+- Simply just Python!
+
+## 🚀Getting Started!
+- First Download Visual Studio Code!
+- After that just copy-paste my code!
+- Thats all!
+
+Thanks for choosing me!
