@@ -31,17 +31,19 @@ def button_clicks(value):
     elif value == "C":
         display.delete(0, tk.END)
 
-    elif value == "X":
-        display.insert(tk.END, "*")
+    elif value in ("X", "-", "/", "+"):
+        current = display.get()
 
-    elif value == '-':
-        display.insert(tk.END, '-')
+        if current == "":
+            return
 
-    elif value == '/':
-        display.insert(tk.END, '/')
+        if current[-1] in ("*", "-", "/", "+"):
+            return
 
-    elif value == '+':
-            display.insert(tk.END, '+')
+        if value == "X":
+            display.insert(tk.END, "*")
+        else:
+            display.insert(tk.END, value)
 
     elif value == "=":
         expression = display.get()
@@ -57,6 +59,7 @@ def button_clicks(value):
 
     else:
         display.insert(tk.END, value)
+
 
 buttons = [
     ("C", 1, 0),
