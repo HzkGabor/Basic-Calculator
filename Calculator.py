@@ -10,9 +10,10 @@ display = tk.Entry(
     window,
     font=('Arial', 32, 'bold'),
     justify='right',
-    bg="#1F1F1F",
-    fg='white',
-    bd=0
+    bg="#1B1B1B",
+    fg='black',
+    bd=0,
+    state='readonly'
 )
 
 display.grid(
@@ -24,12 +25,52 @@ display.grid(
     ipady=15
 )
 
+def display_insert(value):
+    display.config(state='normal')
+    display.insert(tk.END, value)
+    display.config(state='readonly')
+
+def display_delete(start, end=None):
+    display.config(state='normal')
+
+    if end is None:
+        display.delete(start)
+    else:
+        display.delete(start, end)
+
+    display.config(state='readonly')
+
 def button_clicks(value):
     if value == "Del":
-        display.delete(len(display.get()) - 1, tk.END)
+        current = display.get()
+
+        if current == "Error":
+            display_delete(0, tk.END)
+
+        elif current:
+            display_delete(len(current) - 1, tk.END)
 
     elif value == "C":
-        display.delete(0, tk.END)
+        display_delete(0, tk.END)
+
+    elif value == "%":
+        current = display.get()
+
+        if current == "":
+            return
+
+        try:
+            result = float(current) / 100
+
+            if result.is_integer():
+                result = int(result)
+
+            display_delete(0, tk.END)
+            display_insert(result)
+
+        except:
+            display_delete(0, tk.END)
+            display_insert("Error")
 
     elif value in ("X", "-", "/", "+"):
         current = display.get()
@@ -41,48 +82,48 @@ def button_clicks(value):
             return
 
         if value == "X":
-            display.insert(tk.END, "*")
+            display_insert("*")
         else:
-            display.insert(tk.END, value)
+            display_insert(value)
 
     elif value == "=":
         expression = display.get()
 
         try:
             result = eval(expression)
-            display.delete(0, tk.END)
-            display.insert(tk.END, result)
+
+            display_delete(0, tk.END)
+            display_insert(result)
 
         except:
-            display.delete(0, tk.END)
-            display.insert(tk.END, "Error")
+            display_delete(0, tk.END)
+            display_insert("Error")
 
     else:
-        display.insert(tk.END, value)
-
+        display_insert(value)
 
 buttons = [
     ("C", 1, 0),
     ("Del", 1, 1),
     ("%", 1, 2),
-    ("/", 1, 3),
-    
+    ("()", 1, 3),
+
     ("7", 2, 0),
     ("8", 2, 1),
     ("9", 2, 2),
     ("X", 2, 3),
-    
+
     ("4", 3, 0),
     ("5", 3, 1),
     ("6", 3, 2),
     ("-", 3, 3),
-    
+
     ("1", 4, 0),
     ("2", 4, 1),
     ("3", 4, 2),
     ("+", 4, 3),
-    
-    ("()", 5, 0),
+
+    ("/", 5, 0),
     ("0", 5, 1),
     (".", 5, 2),
     ("=", 5, 3),
